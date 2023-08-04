@@ -1,0 +1,143 @@
+name: Gotrade Test Data Action
+description: "Gotrade extract test data"
+inputs:
+  unit_test_output:
+    description: "Unit test output"
+    required: true
+  unit_cover_output:
+    description: "Unit coverage output"
+    required: true
+  integration_test_output:
+    description: "Integration test output"
+    required: true
+  integration_cover_output:
+    description: "Integration coverage output"
+    required: true
+  gist_id:
+    description: "Gist id"
+    required: true
+  gist_github_token:
+    description: "Github token"
+    required: true
+  gist_prefix:
+    description: "Prefix"
+    required: true
+  unit_test_warn:
+    description: "How many failure is warning for unit test"
+    required: true
+    default: "0"
+  unit_test_fail:
+    description: "How many failure is fail for unit test"
+    required: true
+    default: "0"
+  integration_test_warn:
+    description: "How many failure is warning for integration test"
+    required: true
+    default: "0"
+  integration_test_fail:
+    description: "How many failure is fail for integration test"
+    required: true
+    default: "0"
+  unit_cover_warn:
+    required: true
+    description: "How much coverage is warning for unit test"
+    default: "95"
+  unit_cover_fail:
+    description: "How much coverage is fail for unit test"
+    required: true
+    default: "90"
+  integration_cover_warn:
+    description: "How much coverage is warning for integration test"
+    required: true
+    default: "95"
+  integration_cover_fail:
+    description: "How much coverage is fail for integration test"
+    required: true
+    default: "90"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Test Tracker
+      id: test-tracker
+      uses: tr8team/test-tracker@v1.3.0
+      with:
+        data: |
+          [
+            ${{ inputs.unit_test_output }},
+            ${{ inputs.unit_cover_output }},
+            ${{ inputs.integration_test_output }},
+            ${{ inputs.integration_cover_output }}
+          ]
+        gist_id: "${{ inputs.gist_id }}"
+        github_token: ${{ inputs.gist_github_token }}
+        prefix: "${{ inputs.gist_prefix }}"
+
+    - name: Test Quality Gate Policies
+      id: test-quality-gate
+      uses: tr8team/actions.test-qualitygate@v1.0.1
+      with:
+        current: ${{ steps.test-tracker.outputs.current }}
+        base: ${{ steps.test-tracker.outputs.base }}
+        history: ${{ steps.test-tracker.outputs.before }}
+        policies: |
+          [
+            {
+              "name": "No failures for Unit Tests",
+              "target": "Unit Test Results",
+              "data": {
+                "type": "max-literal-test-policy",
+                "metric": "fail",
+                "warn": ${{ inputs.unit_test_warn }},
+                "fail": ${{ inputs.unit_test_fail }}
+              }
+            },
+            {
+              "name": "No failures for Integration Tests",
+              "target": "Integration Test Results",
+              "data": {
+                "type": "max-literal-test-policy",
+                "metric": "fail",
+                "warn": ${{ inputs.integration_test_warn }},
+                "fail": ${{ inputs.integration_test_fail }}
+              }
+            },
+            {
+              "name": "Minimum 90% coverage for Unit Tests",
+              "target": "Unit Test Coverage",
+              "data": {
+                "type": "any-coverage-policy",
+                "warn": ${{ inputs.unit_cover_warn }},
+                "fail": ${{ inputs.unit_cover_fail }}
+              }
+            },
+            {
+              "name": "Minimum 90% coverage for Integration Tests",
+              "target": "Integration Test Coverage",
+              "data": {
+                "type": "any-coverage-policy",
+                "warn": ${{ inputs.integration_cover_warn }},
+                "fail": ${{ inputs.integration_cover_fail }}
+              }
+            }
+          ]
+    - name: test-markdown
+      id: test-markdown
+      uses: tr8team/actions.test-markdown@v1.0.6
+      if: always()
+      with:
+        current: ${{ steps.test-quality-gate.outputs.current }}
+        history: ${{ steps.test-quality-gate.outputs.history }}
+    - name: Comment PR with execution number
+      uses: thollander/actions-comment-pull-request@v2
+      if: always()
+      with:
+        message: |
+          ${{ steps.test-markdown.outputs.currentMarkdown }}
+
+          ## History
+          ${{ steps.test-markdown.outputs.historyMarkdown }}
+        comment_tag: test-markdown-comment
+    - name: Write to Summary
+      if: always()
+      run: echo '${{ steps.test-markdown.outputs.currentMarkdown }}' >> $GITHUB_STEP_SUMMARY

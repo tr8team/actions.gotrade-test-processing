@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+  cfg:scripts:
+    desc: Make scripts executable
+    cmds:
+      - chmod -R +x ./scripts
+
+  check:
+    desc: Run all formatters, linters and enforcers
+    cmds:
+      - pre-commit run --all

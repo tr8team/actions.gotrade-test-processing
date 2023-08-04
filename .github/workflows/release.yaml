@@ -1,0 +1,26 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    name: Release
+    runs-on:
+      - nix
+      - ARM64
+    steps:
+      - name: Gotrade CI Environment
+        uses: kirinnee/atomici-action@v2.3.1
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Remove GitHooks
+        run: rm ./.git/hooks/*
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: nix develop .#releaser --command scripts/ci/release.sh
