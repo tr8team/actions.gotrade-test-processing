@@ -1,5 +1,5 @@
-name: Gotrade Test Data Action
-description: "Gotrade extract test data"
+name: Gotrade Proccess Data Action
+description: "Gotrade proccess test data"
 inputs:
   unit_test_output:
     description: "Unit test output"
