@@ -1,5 +1,5 @@
 name: Gotrade Proccess Data Action
-description: "Gotrade proccess test data"
+description: "Gotrade pr test data"
 inputs:
   unit_test_output:
     description: "Unit test output"
@@ -72,7 +72,6 @@ runs:
         gist_id: "${{ inputs.gist_id }}"
         github_token: ${{ inputs.gist_github_token }}
         prefix: "${{ inputs.gist_prefix }}"
-
     - name: Test Quality Gate Policies
       id: test-quality-gate
       uses: tr8team/actions.test-qualitygate@v1.0.1
@@ -139,5 +138,6 @@ runs:
           ${{ steps.test-markdown.outputs.historyMarkdown }}
         comment_tag: test-markdown-comment
     - name: Write to Summary
+      shell: bash
       if: always()
       run: echo '${{ steps.test-markdown.outputs.currentMarkdown }}' >> $GITHUB_STEP_SUMMARY
