@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.2...v1.0.3) (2023-08-05)
+
+
+### Bug Fixes
+
+* outdated sub actions ([aa4086a](https://github.com/tr8team/actions.gotrade-test-processing/commit/aa4086a5dc176f5bc4cd20a45c9d145b8acf8218))
+
 ## [1.0.2](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.1...v1.0.2) (2023-08-04)
 
 
