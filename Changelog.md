@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.2.0...v1.3.0) (2023-08-15)
+
+
+### Features
+
+* update dependency of test markdown to 1.1.2 ([ef122fe](https://github.com/tr8team/actions.gotrade-test-processing/commit/ef122fe81617ca7540f219d28163be2dfa48ca27))
+
 ## [1.2.0](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.1.0...v1.2.0) (2023-08-15)
 
 
