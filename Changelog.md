@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.4...v1.0.5) (2023-08-15)
+
+
+### Bug Fixes
+
+* respect cover property in policy name ([136d5f3](https://github.com/tr8team/actions.gotrade-test-processing/commit/136d5f3b53d5e8832d92dcea20bc475d9143a4f9))
+
 ## [1.0.4](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.3...v1.0.4) (2023-08-15)
 
 
