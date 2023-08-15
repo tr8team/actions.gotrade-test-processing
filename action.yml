@@ -122,7 +122,7 @@ runs:
           ]
     - name: test-markdown
       id: test-markdown
-      uses: tr8team/actions.test-markdown@v1.0.8
+      uses: tr8team/actions.test-markdown@v1.1.0
       if: always()
       with:
         current: ${{ steps.test-quality-gate.outputs.current }}
@@ -142,3 +142,13 @@ runs:
       shell: bash
       if: always()
       run: echo '${{ steps.test-markdown.outputs.currentMarkdown }}' >> $GITHUB_STEP_SUMMARY
+outputs:
+  current:
+    value: ${{ steps.test-markdown.outputs.currentMarkdown }}
+    description: "Current commit markdown"
+  history:
+    value: ${{ steps.test-markdown.outputs.historyMarkdown }}
+    description: "History markdown"
+  badges:
+    value: ${{ steps.test-markdown.outputs.badges }}
+    description: "Badges"
