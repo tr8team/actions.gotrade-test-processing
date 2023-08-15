@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.1.0...v1.2.0) (2023-08-15)
+
+
+### Features
+
+* bump dependency to 1.1.1 ([7dbe333](https://github.com/tr8team/actions.gotrade-test-processing/commit/7dbe33345b2f4fffb75b9d43948eb1079488157d))
+
 ## [1.1.0](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.5...v1.1.0) (2023-08-15)
 
 
