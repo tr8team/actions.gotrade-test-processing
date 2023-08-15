@@ -102,7 +102,7 @@ runs:
               }
             },
             {
-              "name": "Minimum 90% coverage for Unit Tests",
+              "name": "Minimum ${{ inputs.unit_cover_fail }}% coverage for Unit Tests",
               "target": "Unit Test Coverage",
               "data": {
                 "type": "any-coverage-policy",
@@ -111,7 +111,7 @@ runs:
               }
             },
             {
-              "name": "Minimum 90% coverage for Integration Tests",
+              "name": "Minimum ${{ inputs.integration_cover_fail }}% coverage for Integration Tests",
               "target": "Integration Test Coverage",
               "data": {
                 "type": "any-coverage-policy",
