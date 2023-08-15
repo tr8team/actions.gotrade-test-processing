@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.5...v1.1.0) (2023-08-15)
+
+
+### Features
+
+* output markdown ([a9cc335](https://github.com/tr8team/actions.gotrade-test-processing/commit/a9cc335ce6dfad2a16111d8c8a5d560cb9828a64))
+
 ## [1.0.5](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.4...v1.0.5) (2023-08-15)
 
 
