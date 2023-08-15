@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.3...v1.0.4) (2023-08-15)
+
+
+### Bug Fixes
+
+* allow PR to comment to be skipped on non-PR branches ([78d480f](https://github.com/tr8team/actions.gotrade-test-processing/commit/78d480fa3c4277ab86dbae526f545c102e8fe52c))
+
 ## [1.0.3](https://github.com/tr8team/actions.gotrade-test-processing/compare/v1.0.2...v1.0.3) (2023-08-05)
 
 
